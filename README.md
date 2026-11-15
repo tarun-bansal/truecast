@@ -50,7 +50,7 @@ and measured:
 [**Download the latest `.deb`**](https://github.com/tarun-bansal/truecast/releases/latest) and install it:
 
 ```bash
-sudo apt install ./truecast_0.1.0_amd64.deb
+sudo apt install ./truecast_0.1.1_amd64.deb
 ```
 
 Tested on Ubuntu 26.04 LTS with GNOME on X11. Wayland and HiDPI are untested.
