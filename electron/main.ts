@@ -11,6 +11,23 @@ const isDev = process.env.NODE_ENV === "development";
 app.commandLine.appendSwitch("no-sandbox");
 app.disableHardwareAcceleration();
 
+/**
+ * Bring the existing window forward. Clicking the dock/taskbar icon, or
+ * launching the app again, must focus what is already open instead of
+ * leaving it behind another window.
+ */
+function focusMainWindow() {
+  const win = BrowserWindow.getAllWindows()[0];
+  if (!win) {
+    createWindow();
+    return;
+  }
+  if (win.isMinimized()) win.restore();
+  if (!win.isVisible()) win.show();
+  win.moveTop();
+  win.focus();
+}
+
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
@@ -71,7 +88,18 @@ function createWindow() {
   return win;
 }
 
-app.whenReady().then(() => {
+// One process only: a second launch focuses the first window instead of
+// opening a second one that nobody can see.
+const hasInstanceLock = app.requestSingleInstanceLock();
+if (!hasInstanceLock) {
+  app.quit();
+} else {
+  app.on("second-instance", () => {
+    focusMainWindow();
+  });
+}
+
+if (hasInstanceLock) app.whenReady().then(() => {
   app.setAboutPanelOptions({
     applicationName: "Truecast",
     applicationVersion: app.getVersion(),
@@ -110,7 +138,7 @@ app.whenReady().then(() => {
   createWindow();
 
   app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    focusMainWindow();
   });
 });
 

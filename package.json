@@ -64,7 +64,13 @@
       "category": "Weather",
       "maintainer": "tarun-bansal",
       "description": "macOS-like Weather app for Ubuntu",
-      "icon": "build/icon.png"
+      "icon": "build/icon.png",
+      "desktop": {
+        "entry": {
+          "StartupWMClass": "truecast"
+        }
+      },
+      "syncDesktopName": true
     },
     "deb": {
       "compression": "xz"
@@ -77,5 +83,6 @@
   "bugs": {
     "url": "https://github.com/tarun-bansal/truecast/issues"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "desktopName": "truecast.desktop"
 }
