@@ -4,9 +4,10 @@
 [![Release](https://img.shields.io/github/v/release/tarun-bansal/truecast?color=3b7fe0)](https://github.com/tarun-bansal/truecast/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-**A weather app that proves its numbers.** macOS-style, for Linux. Every reading
-on screen is checked against the API it came from, and the receipts are in
-[`QA.md`](QA.md).
+**Weather, with receipts.** A macOS-style weather app for Linux. CI opens the
+packaged app, reads ~125 values off the screen, re-fetches the Open-Meteo
+response it used, and fails the build when they disagree. The review record —
+including a finding the gate got wrong — is in [`QA.md`](QA.md).
 
 ![Truecast demo](docs/demo.gif)
 
@@ -20,18 +21,20 @@ The bugs it shipped with, and how they were found, are written up in
 
 ## Why this one
 
-Most desktop weather apps are a web page in a frame. This one is small, honest,
-and measured:
+Built on Electron, so it is large (~100 MB download). What it does differently is
+check its numbers and avoid API keys:
 
 - **No API key, no account, no telemetry.** [Open-Meteo](https://open-meteo.com)
   is called directly from the app.
 - **Numbers you can audit.** Hero, high/low, feels-like, humidity, wind, UV,
   visibility, pressure, sunrise/sunset, 24 hourly cards and 10 daily rows are
-  compared against the API response — 131–132 of them, all matching.
+  compared against the API response — over 120 of them, all matching in the
+  committed run.
 - **City-local time everywhere.** Dates and hours come from the city's own
   sunrise/sunset, never the host clock.
 - **Measured accessibility.** Contrast sampled from rendered pixels (worst
-  sampled layer 6.19:1), real dialog semantics, focus trap, 24 px targets,
+  sampled 5.56:1 light / 6.19:1 dark), real dialog semantics, focus trap, 24 px
+  targets,
   `prefers-reduced-motion`, forced-colors selection.
 - **One request per load.** In-flight de-duplication plus a 60 s cache.
 
@@ -43,7 +46,7 @@ and measured:
 - City search with keyboard support; saved favourites reorder by arrow key or drag
 - Last city, units and favourites persist across launches
 - `Ctrl+R` refreshes, `Ctrl+F` searches, arrows move through results
-- Frameless window with real traffic lights, Restore state and double-click zoom
+- Frameless window with macOS-style controls, maximize/restore and double-click zoom
 
 ## Install
 
@@ -69,9 +72,10 @@ npm run lint
 node e2e/smoke.mjs       # end-to-end against the packaged binary (needs a display)
 ```
 
-Requires Node 20+ and a Linux desktop with X11. No sandbox setup is needed — the
-main process starts with `--no-sandbox` so the packaged binary runs on systems
-where `chrome-sandbox` is not setuid-root.
+Requires Node 22+ and a Linux desktop with X11. The main process starts Chromium
+with `--no-sandbox` so the packaged binary runs without the setuid
+`chrome-sandbox` helper. That trades away part of Chromium's process isolation;
+the app loads only Open-Meteo and local resources.
 
 ## How it is put together
 
@@ -110,21 +114,26 @@ Inter is bundled under the SIL Open Font License
 ## Limitations, stated
 
 - Linux only, x64. The package is a `.deb`.
-- No geolocation, settings window, notifications or tray icon yet.
+- No geolocation, notifications, alerts or radar yet. Settings cover units,
+  reduced motion and About.
 - English only.
 - The hero numeral scales with your font size but the layout is tuned for
   1000 × 700.
 
 ## Quality
 
-The app passed an independent ship gate at **7.1 / 10**, with **0 P0 and 0 P1**.
-Three runs, their measurements, and the things that were *not* fixed are in
-[`QA.md`](QA.md); the full reports are in [`design-review/`](design-review/).
+An AI design review, scored against a rubric by the author, gave the **0.1.0**
+build **7.1 / 10** with **0 P0 and 0 P1**. Fixes made after that review are listed
+in [`QA.md`](QA.md); they have not been independently re-reviewed. The three
+reports, their measurements and the things that were *not* fixed are in
+[`design-review/`](design-review/).
 
-That is backed by 30 unit tests, an end-to-end smoke test against the packaged
-binary (launch, API agreement, units, shortcuts), and a **truth check that fails
-the build when the UI and the API disagree** — all on every push.
-Packaging notes for AUR and Flathub are in [`packaging/`](packaging/).
+That is backed by **32 unit tests**, an end-to-end smoke test, and a truth check
+that fails the build when the UI and the API disagree. The truth check **skips
+with a notice** when the runner cannot reach Open-Meteo, so a green build means
+"no disagreement found", not "the API was reachable". CI runs on pushes to `main`
+and on pull requests. Packaging notes for AUR and Flathub are in
+[`packaging/`](packaging/).
 
 ## Licence
 
