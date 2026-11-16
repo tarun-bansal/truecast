@@ -11,4 +11,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.on("window-maximized", handler);
     return () => ipcRenderer.removeListener("window-maximized", handler);
   },
+  onOpenSettings: (callback: () => void) => {
+    const handler = () => callback();
+    ipcRenderer.on("open-settings", handler);
+    return () => ipcRenderer.removeListener("open-settings", handler);
+  },
 });

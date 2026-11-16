@@ -4,6 +4,7 @@ import { DEFAULT_UNITS, type UnitPreferences } from "@/services/weatherApi";
 const FAVORITES_KEY = "weather.favorites.v1";
 const UNITS_KEY = "weather.units.v1";
 const CITY_KEY = "weather.city.v1";
+const MOTION_KEY = "weather.motion.v1";
 
 /** Keep the list short enough to be a quick-access row, not a second address book. */
 const MAX_FAVORITES = 12;
@@ -102,6 +103,23 @@ export function readUnits(): UnitPreferences {
 
 export function writeUnits(units: UnitPreferences): void {
   write(UNITS_KEY, units);
+}
+
+/**
+ * True when the user asked animations off regardless of the OS setting.
+ * Anything that is not a boolean is not a preference — fall back to following
+ * the OS.
+ */
+export function readReduceMotion(): boolean {
+  return read<boolean>(
+    MOTION_KEY,
+    (value) => (typeof value === "boolean" ? value : null),
+    false,
+  );
+}
+
+export function writeReduceMotion(value: boolean): void {
+  write(MOTION_KEY, value);
 }
 
 export { MAX_FAVORITES };

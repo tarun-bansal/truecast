@@ -5,11 +5,29 @@ import CurrentWeatherHeader from "@/components/CurrentWeatherHeader";
 import HourlyForecastStrip from "@/components/HourlyForecastStrip";
 import TenDayForecast from "@/components/TenDayForecast";
 import WeatherDetailGrid from "@/components/WeatherDetailGrid";
+import { SettingsSheet } from "@/components/SettingsSheet";
 import { useWeather } from "@/state/WeatherProvider";
 
 export default function App() {
-  const { data, city, status, error, isStale, failedCity, retry, dismissError, refresh, openSearch } =
-    useWeather();
+  const {
+    data,
+    city,
+    status,
+    error,
+    isStale,
+    failedCity,
+    retry,
+    dismissError,
+    refresh,
+    openSearch,
+    units,
+    changeUnits,
+    isSettingsOpen,
+    openSettings,
+    closeSettings,
+    reduceMotion,
+    setReduceMotion,
+  } = useWeather();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -23,10 +41,23 @@ export default function App() {
         event.preventDefault();
         openSearch();
       }
+      if (key === ",") {
+        event.preventDefault();
+        openSettings();
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [refresh, openSearch]);
+  }, [refresh, openSearch, openSettings]);
+
+  // The app menu's Settings item (the menu bar itself is hidden by design).
+  useEffect(() => {
+    const api = (window as any).electronAPI ?? {};
+    const off = api.onOpenSettings?.(() => openSettings());
+    return () => {
+      off?.();
+    };
+  }, [openSettings]);
 
   return (
     <div className="fixed inset-0 w-full h-full overflow-hidden font-sans selection:bg-blue-500/30">
@@ -79,6 +110,14 @@ export default function App() {
           )}
         </main>
       </div>
+      <SettingsSheet
+        open={isSettingsOpen}
+        onClose={closeSettings}
+        units={units}
+        changeUnits={changeUnits}
+        reduceMotion={reduceMotion}
+        setReduceMotion={setReduceMotion}
+      />
     </div>
   );
 }

@@ -109,7 +109,24 @@ if (hasInstanceLock) app.whenReady().then(() => {
   });
   Menu.setApplicationMenu(
     Menu.buildFromTemplate([
-      { label: "Truecast", submenu: [{ role: "about" }, { type: "separator" }, { role: "quit" }] },
+      {
+        label: "Truecast",
+        submenu: [
+          { role: "about" },
+          // The menu bar is hidden by design, so the gear button in the title
+          // bar is the visible entry point — this item exists for the
+          // accelerator and for platforms that show the app menu.
+          {
+            label: "Settings…",
+            accelerator: "CmdOrCtrl+,",
+            click: () => {
+              BrowserWindow.getFocusedWindow()?.webContents.send("open-settings");
+            },
+          },
+          { type: "separator" },
+          { role: "quit" },
+        ],
+      },
       {
         label: "Edit",
         submenu: [

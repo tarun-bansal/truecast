@@ -84,6 +84,9 @@ export function CitySearchModal({
       document.removeEventListener("keydown", onKeyDown);
       // Return focus to the trigger. Programmatic/assistive opens often leave
       // activeElement on <body>, so fall back to the city button explicitly.
+      // But when the sheet closed because the *other* dialog opened in the
+      // same update, that dialog owns focus now — don't steal it back.
+      if (document.querySelector('[role="dialog"]')) return;
       const trigger = document.querySelector<HTMLElement>('[aria-haspopup="dialog"]');
       const previous = previousFocus.current;
       const target =

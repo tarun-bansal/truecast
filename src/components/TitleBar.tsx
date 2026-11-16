@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Bookmark, Minimize2, Minus, RotateCw, Square, X } from "lucide-react";
+import { Bookmark, Minimize2, Minus, RotateCw, Settings, Square, X } from "lucide-react";
 import { useWeather } from "@/state/WeatherProvider";
 import type { UnitPreferences } from "@/services/weatherApi";
 
@@ -24,7 +24,7 @@ const UNIT_OPTIONS: Array<{ short: string; label: string; value: UnitPreferences
 export default function TitleBar() {
   const api = (window as any).electronAPI ?? {};
   const { minimize, maximize, close, isMaximized, onMaximizedChange, toggleMaximize } = api;
-  const { units, changeUnits, favorites, openSearch, isSearchOpen, refresh, isStale } = useWeather();
+  const { units, changeUnits, favorites, openSearch, isSearchOpen, refresh, isStale, openSettings, isSettingsOpen } = useWeather();
 
   const [maximized, setMaximized] = useState(false);
   useEffect(() => {
@@ -152,6 +152,21 @@ export default function TitleBar() {
             );
           })}
         </div>
+
+        {/* The visible way into Settings. The app menu has the same item, but
+            the menu bar is hidden by design, so this gear is the entry point
+            most people will actually see. */}
+        <button
+          onClick={openSettings}
+          data-settings-trigger
+          aria-haspopup="dialog"
+          aria-expanded={isSettingsOpen}
+          aria-label="Open settings"
+          title="Settings (Ctrl+,)"
+          className="chip flex h-7 w-7 items-center justify-center rounded-full text-app-2 transition hover:text-app"
+        >
+          <Settings size={13} aria-hidden="true" />
+        </button>
       </div>
     </header>
   );

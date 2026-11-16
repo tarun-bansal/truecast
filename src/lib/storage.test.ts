@@ -4,8 +4,10 @@ import {
   placeKey,
   readCity,
   readFavorites,
+  readReduceMotion,
   readUnits,
   writeFavorites,
+  writeReduceMotion,
 } from "./storage";
 import type { City } from "@/types/weather";
 import { DEFAULT_UNITS } from "@/services/weatherApi";
@@ -79,6 +81,22 @@ describe("reading units", () => {
   it("rejects an unknown unit and falls back", () => {
     store.set("weather.units.v1", JSON.stringify({ temperature: "kelvin", windSpeed: "mph" }));
     expect(readUnits()).toEqual(DEFAULT_UNITS);
+  });
+});
+
+describe("reading the reduce-motion override", () => {
+  it("round-trips what it writes", () => {
+    writeReduceMotion(true);
+    expect(readReduceMotion()).toBe(true);
+    writeReduceMotion(false);
+    expect(readReduceMotion()).toBe(false);
+  });
+
+  it("falls back to following the OS on bad data", () => {
+    store.set("weather.motion.v1", JSON.stringify("yes"));
+    expect(readReduceMotion()).toBe(false);
+    store.set("weather.motion.v1", "{not json");
+    expect(readReduceMotion()).toBe(false);
   });
 });
 

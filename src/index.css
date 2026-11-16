@@ -58,6 +58,12 @@
   --sheet-field-border: rgba(255, 255, 255, 0.16);
   --sheet-accent: #7dd3fc;
   --sheet-accent-bg: rgba(125, 211, 252, 0.12);
+  /* The motion switch: the white knob must clear 3:1 (WCAG 1.4.11) against
+     the track in both states, on the rendered pixel. The off track keeps
+     the old 16%-white fill (11.2:1); the on track is a deeper blue than
+     --sheet-accent, whose sky tint only reaches 1.67:1 against the knob. */
+  --sheet-switch-off: rgba(255, 255, 255, 0.16);
+  --sheet-switch-on: #2563eb;
   --danger: #fca5a5;
 
   --focus-ring: #ffffff;
@@ -97,6 +103,12 @@
   --sheet-field-border: rgba(15, 23, 42, 0.12);
   --sheet-accent: #2563eb;
   --sheet-accent-bg: rgba(37, 99, 235, 0.1);
+  /* The motion switch: the white knob must clear 3:1 (WCAG 1.4.11) against
+     the track in both states, on the rendered pixel. The old off track was
+     --sheet-field-border at 12% ink: 1.44:1, so it gets its own slate fill
+     (~4.8:1); the on track is the accent blue (~5.1:1). */
+  --sheet-switch-off: #64748b;
+  --sheet-switch-on: #2563eb;
   --danger: #b91c1c;
 
   --focus-ring: #0b57d0;
@@ -286,4 +298,21 @@ a {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ── Reduce-motion override ────────────────────────────────────────────────
+   The Settings sheet's toggle: the same silence as the OS setting, driven by
+   data-motion="reduce" on <html> instead of the media query, so it holds even
+   when the OS allows motion. */
+[data-motion="reduce"] .city-enter {
+  animation: none;
+}
+
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  scroll-behavior: auto !important;
 }
