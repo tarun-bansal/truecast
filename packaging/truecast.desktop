@@ -1,9 +1,9 @@
 [Desktop Entry]
 Name=Truecast
-Comment=A weather app that proves its numbers
+Comment=A macOS-style weather app for Linux. Its numbers are checked in CI.
 Exec=/opt/truecast/truecast %U
 Terminal=false
 Type=Application
 Icon=truecast
 Categories=Weather;Utility;
-StartupWMClass=Truecast
+StartupWMClass=truecast

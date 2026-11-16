@@ -19,17 +19,18 @@ stating false things on screen, and because "it builds" is not a quality claim.
 - **Evidence** (screens, `-bg` plates, JSON) is committed under
   `design-review/evidence-*/`.
 
-## The three runs
+## The passes
 
-| Run | Verdict | Score | What it found |
+| Pass | Verdict | Score | What it found |
 |---|---|---|---|
-| 1 | FAIL | ~6.5–6.8 (no scorecard) | 0 P0; four P1s (search sheet clipping, city not persisted, 800 px layout, six content axes); budget ran out before the report |
-| 2 | FAIL | 6.9 | 0 P0; two claimed P1s — one **false positive**, rejected after reproduction (favourites persist); the other real (the sheet jumped 152 px) |
-| 3 | **PASS** | **7.1** | 0 P0, 0 P1, 4 P2, 5 P3 |
+| Original gate | FAIL | **3.9** | 6 P0, 13 P1, 12 P2 — the report in `SHIP-GATE.md` |
+| Re-gate 1 | FAIL | ~6.5–6.8 (no scorecard) | 0 P0; four P1s (search sheet clipping, city not persisted, 800 px layout, six content axes); budget ran out before the report |
+| Re-gate 2 | FAIL | 6.9 | 0 P0; two claimed P1s — one **false positive**, rejected after reproduction (favourites persist); the other real (the sheet jumped 152 px) |
+| Re-gate 3 | **PASS** | **7.1** | 0 P0, 0 P1, 4 P2, 5 P3 |
 
 Gate rule: **PASS = 0 P0, ≤ 1 P1, and no data-integrity defect.**
 
-Run 3's own report is [`design-review/SHIP-GATE-2.md`](design-review/SHIP-GATE-2.md).
+Re-gate 3's own report is [`design-review/SHIP-GATE-2.md`](design-review/SHIP-GATE-2.md).
 The original gate is [`design-review/SHIP-GATE.md`](design-review/SHIP-GATE.md);
 the reconciliation, including the rejected finding, is
 [`design-review/REGATE.md`](design-review/REGATE.md).

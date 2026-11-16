@@ -33,7 +33,7 @@ check its numbers and avoid API keys:
 - **City-local time everywhere.** Dates and hours come from the city's own
   sunrise/sunset, never the host clock.
 - **Measured accessibility.** Contrast sampled from rendered pixels (worst
-  sampled 5.56:1 light / 6.19:1 dark), real dialog semantics, focus trap, 24 px
+  sampled 5.56:1 light / 6.19:1 dark; an exhaustive sweep found 4.53:1, still above AA), real dialog semantics, focus trap, 24 px
   targets,
   `prefers-reduced-motion`, forced-colors selection.
 - **One request per load.** In-flight de-duplication plus a 60 s cache.
@@ -56,7 +56,7 @@ check its numbers and avoid API keys:
 sudo apt install ./truecast_0.1.2_amd64.deb
 ```
 
-Tested on Ubuntu 26.04 LTS with GNOME on X11. Wayland and HiDPI are untested.
+Tested on Ubuntu 26.04 LTS with GNOME on X11. Wayland is untested; 2× HiDPI was measured in a headless harness.
 
 ## Run from source
 

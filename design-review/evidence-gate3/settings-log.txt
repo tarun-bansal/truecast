@@ -1,0 +1,220 @@
+=== T1: baseline dialogs ===
+{"dialogs":[],"active":{"tag":"BODY","text":"Truecast\n4\n°C\n°F\nCharlotte weather\nCharlotte\nMONDAY, NOVEMBE","cls":"","isSettingsTrigger":false,"role":null},"searchOpen":false}
+
+=== T2: Ctrl+, opens settings ===
+{
+ "dialogs": [
+  {
+   "modal": "true",
+   "label": "settings-title",
+   "title": "Settings",
+   "visible": true
+  }
+ ],
+ "active": {
+  "tag": "BUTTON",
+  "text": "°C",
+  "cls": "min-w-8 h-6 px-1.5 rounded-full text-xs font-semibold tnum transition text-[colo",
+  "isSettingsTrigger": false,
+  "role": null
+ },
+ "searchOpen": false
+}
+
+=== T3: gear opens settings (close first) ===
+after escape: {"dialogs":[],"active":{"tag":"BUTTON","text":"Open settings","cls":"chip flex h-7 w-7 items-center justify-center rounded-full text-app-2 transition","isSettingsTrigger":true,"role":null},"searchOpen":false}
+after gear: {
+ "dialogs": [
+  {
+   "modal": "true",
+   "label": "settings-title",
+   "title": "Settings",
+   "visible": true
+  }
+ ],
+ "active": {
+  "tag": "BUTTON",
+  "text": "°C",
+  "cls": "min-w-8 h-6 px-1.5 rounded-full text-xs font-semibold tnum transition text-[colo",
+  "isSettingsTrigger": false,
+  "role": null
+ },
+ "searchOpen": false
+}
+
+=== T4: Escape closes exactly one dialog ===
+after escape: {
+ "dialogs": [],
+ "active": {
+  "tag": "BUTTON",
+  "text": "Open settings",
+  "cls": "chip flex h-7 w-7 items-center justify-center rounded-full text-app-2 transition",
+  "isSettingsTrigger": true,
+  "role": null
+ },
+ "searchOpen": false
+}
+
+=== T5: focus return to trigger after gear-open/close ===
+open: {"dialogs":[{"modal":"true","label":"settings-title","title":"Settings","visible":true}],"active":{"tag":"BUTTON","text":"°C","cls":"min-w-8 h-6 px-1.5 rounded-full text-xs font-semibold tnum transition text-[colo","isSettingsTrigger":false,"role":null},"searchOpen":false}
+closed: {"dialogs":[],"active":{"tag":"BUTTON","text":"Open settings","cls":"chip flex h-7 w-7 items-center justify-center rounded-full text-app-2 transition","isSettingsTrigger":true,"role":null},"searchOpen":false}
+
+=== T6: focus return to trigger after Ctrl+, open/close ===
+open: {"dialogs":[{"modal":"true","label":"settings-title","title":"Settings","visible":true}],"active":{"tag":"BUTTON","text":"°C","cls":"min-w-8 h-6 px-1.5 rounded-full text-xs font-semibold tnum transition text-[colo","isSettingsTrigger":false,"role":null},"searchOpen":false}
+closed: {"dialogs":[],"active":{"tag":"BUTTON","text":"Open settings","cls":"chip flex h-7 w-7 items-center justify-center rounded-full text-app-2 transition","isSettingsTrigger":true,"role":null},"searchOpen":false}
+
+=== T7: search and settings are mutually exclusive ===
+after Ctrl+F while settings open: {
+ "dialogs": [
+  {
+   "modal": "true",
+   "label": "search-title",
+   "title": "Search city",
+   "visible": true
+  }
+ ],
+ "active": {
+  "tag": "INPUT",
+  "text": "Enter city name",
+  "cls": "app-region-no-drag w-full pl-10 pr-12 py-3 rounded-2xl border border-[color:var(",
+  "isSettingsTrigger": false,
+  "role": "combobox"
+ },
+ "searchOpen": true
+}
+after Ctrl+, while search open: {
+ "dialogs": [
+  {
+   "modal": "true",
+   "label": "settings-title",
+   "title": "Settings",
+   "visible": true
+  }
+ ],
+ "active": {
+  "tag": "BUTTON",
+  "text": "°C",
+  "cls": "min-w-8 h-6 px-1.5 rounded-full text-xs font-semibold tnum transition text-[colo",
+  "isSettingsTrigger": false,
+  "role": null
+ },
+ "searchOpen": false
+}
+
+=== T8: Settings content dump ===
+{
+ "html_head": "<div class=\"px-6 py-4 border-b border-[color:var(--sheet-hairline)]\"><div class=\"flex items-center gap-3\"><div class=\"w-8 h-8 rounded-xl bg-[color:var(--sheet-accent-bg)] flex items-center justify-center text-[color:var(--sheet-accent)]\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" strok",
+ "leaves": [
+  {
+   "tag": "H2",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Settings"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Units"
+  },
+  {
+   "tag": "BUTTON",
+   "role": null,
+   "label": "Celsius, wind in kilometres per hour",
+   "pressed": "false",
+   "checked": null,
+   "text": "°C"
+  },
+  {
+   "tag": "BUTTON",
+   "role": null,
+   "label": "Fahrenheit, wind in miles per hour",
+   "pressed": "true",
+   "checked": null,
+   "text": "°F"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Fahrenheit, wind in miles per hour"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Motion"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Reduce motion"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Turns animations off, even if your system allows them."
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "About"
+  },
+  {
+   "tag": "SPAN",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Version 0.1.2"
+  },
+  {
+   "tag": "P",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Weather data by Open-Meteo (CC BY 4.0). Not affiliated with Apple."
+  },
+  {
+   "tag": "BUTTON",
+   "role": null,
+   "label": null,
+   "pressed": null,
+   "checked": null,
+   "text": "Cancel"
+  }
+ ],
+ "text": "Settings\n\nUNITS\n\n°C\n°F\n\nFahrenheit, wind in miles per hour\n\nMOTION\n\nReduce motion\n\nTurns animations off, even if your system allows them.\n\nABOUT\n\nTruecast Version 0.1.2\n\nWeather data by Open-Meteo (CC BY 4.0). Not affiliated with Apple.\n\nCancel"
+}
+
+=== T9: tab order inside settings ===
+0: BUTTON "°C" role=null
+1: BUTTON "°F" role=null
+2: BUTTON "Reduce motion" role=switch
+3: BUTTON "Cancel" role=null
+4: BUTTON "°C" role=null
+5: BUTTON "°F" role=null
+6: BUTTON "Reduce motion" role=switch
+7: BUTTON "Cancel" role=null
+8: BUTTON "°C" role=null
+9: BUTTON "°F" role=null
+10: BUTTON "Reduce motion" role=switch
+11: BUTTON "Cancel" role=null

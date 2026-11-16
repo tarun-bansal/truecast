@@ -2,7 +2,7 @@
   "name": "truecast",
   "private": true,
   "version": "0.1.2",
-  "description": "A weather app that proves its numbers — macOS-style, for Linux.",
+  "description": "A macOS-style weather app for Linux. Its numbers are checked in CI.",
   "homepage": "https://github.com/tarun-bansal/truecast",
   "author": "Tarun Bansal",
   "main": "dist-electron/main.js",

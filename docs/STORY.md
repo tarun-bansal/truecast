@@ -26,7 +26,7 @@ independent ways at the same time.
 A weather app that lies about the weather has no product. The glass made it
 worse: it looked done.
 
-## Gate one: 3.9 / 10, six release blockers
+## The original gate: 3.9 / 10, six release blockers
 
 An independent design gate — run as a rubric, not a vibe check — measured the
 pixels and compared every number against the API. It found **six P0s**, 13 P1s,
@@ -50,7 +50,13 @@ the hero.
 
 Then 132 on-screen values were compared against the API. All of them matched.
 
-## Gate two: 6.9, and a lesson about trusting the gate
+## First re-gate: 6.5–6.8, and no report
+
+Once the data layer was rebuilt, a re-gate confirmed **0 P0** and four P1s — then
+ran out of budget before writing a scorecard. A run without a report is a run you
+cannot cite, so it is listed here as a pass, not a result.
+
+## Second re-gate: 6.9, and a lesson about trusting the gate
 
 The second run confirmed zero P0s and four P1s, and produced a confident finding:
 *"favourites never persist — the geocoding ids are numeric, so the validator
@@ -65,7 +71,7 @@ infallible.
 The other P1 was real: the search sheet grew 152 px the instant results arrived,
 moving the input under the user's hands. Fixed by giving the sheet a fixed height.
 
-## Gate three: 7.1, pass
+## Third re-gate: 7.1, pass
 
 The third run passed: **0 P0, 0 P1**, four P2s. It also caught me overstating a
 fix — I had claimed focus stays in the dialog after removing a favourite. It does,

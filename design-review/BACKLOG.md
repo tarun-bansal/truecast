@@ -209,7 +209,7 @@ the fourth is a design decision with a real cost.
 | F-01 | Removing the **last** favourite dropped focus to `<body>` | **FIXED** — the fallback is now the search input: `activeElement` = `INPUT`, inside the dialog (`p10-final.json`) |
 | F-05 | Empty-state copy pointed at a star that isn't in the result list | **FIXED** — "Search for a city, open it, then use the star beside its name…" |
 | F-02 | The 96 px hero ignored text size | **FIXED** — `6rem`: 96 px normally, **192 px** at 200 % text, no horizontal overflow |
-| F-03 | The search sheet is always light inside the dark theme | **OPEN** — a deliberate choice (the sheet is a light surface), but the gate is right that it breaks the theme. Theming it properly means a token pass and re-measuring the sheet's contrast; not done in this time box. |
+| F-03 | The search sheet is always light inside the dark theme | **FIXED in M1** — tokenised sheet, measured 9.6–17.2:1 dark / 7.1–17.0:1 light. The note above is the state at the time of gate #2. |
 
 `p10-final.json` — 5/5: last-item focus, corrected copy, 96 px at default,
 192 px at 200 %, no overflow.
