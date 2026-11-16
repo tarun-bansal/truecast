@@ -4,7 +4,7 @@
 # The source tag `v$pkgver` must exist before this builds.
 
 pkgname=truecast
-pkgver=0.1.1
+pkgver=0.1.2
 pkgrel=1
 pkgdesc="A weather app that proves its numbers — macOS-style, for Linux"
 arch=('x86_64')
