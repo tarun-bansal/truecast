@@ -46,7 +46,7 @@ sheet 5/5, focus 5/5, truth 131/131, console 0).
 
 | ID | Task | Size | Pri | Notes |
 |---|---|---|---|---|
-| R-20 | Settings sheet / About | M | P1 | **PARTIAL** — native About panel with version + data credit; units already live in the title bar |
+| R-20 | Settings sheet / About | M | P1 | **DONE** — merged from #4: units, persisted reduce-motion override, About; `Ctrl+,` and gear |
 | R-21 | Manual refresh + last-updated | S | P1 | **DONE** — refresh control spins while stale; `Ctrl+R` |
 | R-22 | Keyboard shortcuts | S | P1 | **DONE** — `Ctrl+R`, `Ctrl+F`, Esc, Enter, arrows |
 | R-23 | Search results as a real combobox | S | P2 | **DONE** — `role=combobox/listbox/option`, active descendant |
