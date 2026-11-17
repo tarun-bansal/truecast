@@ -96,6 +96,12 @@ try {
     cdp.eval(`document.querySelector('[role="dialog"]')?.getAttribute('aria-labelledby') ?? ''`);
   await cdp.eval(`document.querySelector('[data-settings-trigger]').click()`);
   await waitFor(cdp, `!!document.querySelector('[role="dialog"]')`, "sheet open");
+  // The search sheet only renders once the app has data; without it the
+  // Ctrl+F half of this check cannot run (CI runners sometimes have no API).
+  const hasData = await cdp.eval(`!!document.querySelector('button[aria-label^="Change city"]')`);
+  if (!hasData) {
+    skip("dialog exclusivity (Ctrl+F / Ctrl+,)", "app has no data, so the search sheet cannot open");
+  } else {
   check("settings open before Ctrl+F", (await dialogCount()) === 1, await dialogCount());
   await cdp.key("f", "KeyF", 70, 2);
   await sleep(500);
@@ -118,6 +124,7 @@ try {
   await sleep(400);
   check("Escape closes it after the switch", !(await dialogOpen()));
   check("focus returns to the gear after the switch", (await activeLabel()) === "Open settings", await activeLabel());
+  }
 
   // About: version only, no commit hash anywhere in the sheet.
   await cdp.eval(`document.querySelector('[data-settings-trigger]').click()`);
