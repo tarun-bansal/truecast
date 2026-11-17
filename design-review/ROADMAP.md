@@ -92,6 +92,13 @@ packaged binary; `npm run typecheck` and `npm run lint` clean; `p15-hidpi.json`
 **M4 verification:** `node e2e/truth.mjs` → 125/125 agree; `node e2e/smoke.mjs`
 → 8/8; CI runs both under xvfb.
 
+## Open requests
+
+| Issue | What | Size | Note |
+|---|---|---|---|
+| [#5](https://github.com/tarun-bansal/truecast/issues/5) | Choose a default city (what the app opens on) | M | storage + provider + a Settings row; distinct from "last viewed" |
+| [#6](https://github.com/tarun-bansal/truecast/issues/6) | Use my location | M–L | GeoClue2 from the main process; reverse-geocoding decision; privacy copy |
+
 ## Definition of "polished"
 
 - No open finding above P2, and every P2 either fixed or **stated** in the README.
