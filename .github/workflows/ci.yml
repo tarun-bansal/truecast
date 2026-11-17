@@ -34,3 +34,4 @@ jobs:
       - run: xvfb-run -a node e2e/smoke.mjs
       # The differentiator: fail the build when the UI and the API disagree.
       - run: xvfb-run -a node e2e/truth.mjs
+      - run: xvfb-run -a node e2e/settings.mjs

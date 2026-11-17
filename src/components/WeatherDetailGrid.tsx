@@ -18,7 +18,7 @@ interface DetailCardProps {
 
 function DetailCard({ label, value, sub, icon: Icon }: DetailCardProps) {
   return (
-    <div className="glass p-4 rounded-2xl min-h-[104px] flex flex-col">
+    <div className="glass p-4 rounded-2xl min-h-[104px] min-w-0 flex flex-col">
       <div className="flex items-center gap-2.5 mb-3">
         <span className="w-7 h-7 rounded-lg flex items-center justify-center bg-[color:var(--chip-fill)]">
           <Icon size={15} className="text-app-2" aria-hidden="true" />
@@ -27,7 +27,7 @@ function DetailCard({ label, value, sub, icon: Icon }: DetailCardProps) {
           {label}
         </span>
       </div>
-      <div className="text-app text-xl font-medium leading-tight tnum whitespace-nowrap">
+      <div className="text-app text-xl font-medium leading-tight tnum break-words">
         {value}
       </div>
       {sub && <div className="text-app-3 text-xs mt-1 tnum">{sub}</div>}

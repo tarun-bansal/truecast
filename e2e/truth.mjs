@@ -76,7 +76,7 @@ try {
       .find((text) => re.test(text) && text.length < 40) ?? null;
     const cards = [...document.querySelectorAll('section[aria-labelledby="hourly-heading"] .scroll-x > div')]
       .map((card) => (card.innerText || '').split('\\n').map((line) => line.trim()).filter(Boolean));
-    const rows = [...document.querySelectorAll('.space-y-1 > div')]
+    const rows = [...document.querySelectorAll('[data-day-row]')]
       .map((row) => (row.innerText || '').split('\\n').map((line) => line.trim()).filter(Boolean));
     const details = [...document.querySelectorAll('section[aria-label] > div > div')]
       .map((card) => (card.innerText || '').split('\\n').map((line) => line.trim()).filter(Boolean));

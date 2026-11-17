@@ -24,7 +24,7 @@ export default function TenDayForecast({ daily }: TenDayForecastProps) {
       >
         {visible.length}-day forecast
       </h2>
-      <div className="space-y-1">
+      <div className="grid grid-cols-[max-content_1.5rem_max-content_minmax(1rem,1fr)_max-content_max-content] items-center gap-x-3 gap-y-1">
         {visible.map((day) => {
           const left = ((day.minTemperature - weekMin) / span) * 100;
           const width = Math.max(
@@ -34,22 +34,23 @@ export default function TenDayForecast({ daily }: TenDayForecastProps) {
           return (
             <div
               key={day.date}
-              className="glass flex items-center gap-3 px-4 py-2.5 rounded-xl"
+              data-day-row
+              className="glass col-span-full grid grid-cols-subgrid items-center px-4 py-2.5 rounded-xl"
             >
-              <span className="w-14 shrink-0 text-app text-sm font-medium">
+              <span className="text-app text-sm font-medium">
                 {day.isToday ? "Today" : day.dayName}
               </span>
-              <span className="w-6 shrink-0 flex justify-center">
+              <span className="flex justify-center">
                 <ConditionIcon condition={day.condition} size={18} />
               </span>
               <span
-                className="w-8 shrink-0 text-right text-app-2 text-sm tnum"
+                className="text-right text-app-2 text-sm tnum"
                 aria-label={`Low ${Math.round(day.minTemperature)} degrees`}
               >
                 {formatTemp(day.minTemperature)}
               </span>
               <span
-                className="flex-1 h-1.5 rounded-full bg-[color:var(--hairline)] relative overflow-hidden"
+                className="h-1.5 min-w-4 rounded-full bg-[color:var(--hairline)] relative overflow-hidden"
                 aria-hidden="true"
               >
                 <span
@@ -58,12 +59,12 @@ export default function TenDayForecast({ daily }: TenDayForecastProps) {
                 />
               </span>
               <span
-                className="w-8 shrink-0 text-right text-app text-sm font-medium tnum"
+                className="text-right text-app text-sm font-medium tnum"
                 aria-label={`High ${Math.round(day.maxTemperature)} degrees`}
               >
                 {formatTemp(day.maxTemperature)}
               </span>
-              <span className="w-9 shrink-0 text-right text-app-3 text-xs tnum">
+              <span className="text-right text-app-3 text-xs tnum">
                 {day.precipitationProbability > 0 ? `${day.precipitationProbability}%` : "—"}
               </span>
             </div>

@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "name": "Ctrl+, opens Settings",
+      "pass": true
+    },
+    {
+      "name": "focus starts inside the sheet",
+      "pass": true
+    },
+    {
+      "name": "version is injected, not hard-coded",
+      "pass": false,
+      "detail": null
+    },
+    {
+      "name": "12 Tab steps stay in the dialog",
+      "pass": true
+    },
+    {
+      "name": "Escape closes it",
+      "pass": true,
+      "detail": {
+        "open": false,
+        "focus": true
+      }
+    },
+    {
+      "name": "focus returns to the gear",
+      "pass": true,
+      "detail": true
+    },
+    {
+      "name": "°F in the sheet re-requests in °F",
+      "pass": true,
+      "detail": 1
+    },
+    {
+      "name": "the sheet stays open after switching",
+      "pass": true
+    },
+    {
+      "name": "switch sets data-motion",
+      "pass": true,
+      "detail": "reduce"
+    },
+    {
+      "name": "switch is checked and persisted",
+      "pass": true,
+      "detail": {
+        "attr": "reduce",
+        "checked": "true",
+        "stored": "true",
+        "anim": "none",
+        "dur": "1e-06s"
+      }
+    },
+    {
+      "name": "city animation is silenced",
+      "pass": true,
+      "detail": "none"
+    },
+    {
+      "name": "motion override survives a reload",
+      "pass": true
+    },
+    {
+      "name": "only one dialog can be open",
+      "pass": true,
+      "detail": 1
+    }
+  ]
+}
