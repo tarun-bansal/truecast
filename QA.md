@@ -74,6 +74,21 @@ the gate measured the computed value and mistook it for a hard-coded colour.
 
 No finding from gate #3 remains open.
 
+## After the pass (0.1.1–0.1.3)
+
+A re-gate of 0.1.2 was started but did not produce a written report, so it is not
+cited as a score here. It did surface two P2s, both fixed in **0.1.3**:
+
+- At **200% text**, the 10-day rows clipped the precipitation column and the
+  detail values overlapped. Rows are now a shared subgrid with a shrinkable bar,
+  and values wrap; measured: precip inside the card, bar 32 px, no overlap.
+- The global `:focus-visible` rule set `border-radius`, squaring focused pill
+  segments and spilling the ring. Removed; the ring follows the control.
+
+Also in 0.1.3: the Settings-sheet e2e checks run in CI, the truth check uses a
+stable `data-day-row` hook, and the About panel matches the README's claim
+("Weather, with receipts").
+
 ## Reproduce
 
 ```bash
